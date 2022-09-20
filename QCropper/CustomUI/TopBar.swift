@@ -8,23 +8,28 @@ import UIKit
 
 class TopBar: UIView {
     lazy var flipButton: UIButton = {
-        let button = self.iconButton(iconName: "QCropper.flip.horizontal.fill")
-        button.left = 0
+        let button = self.iconButton(iconName: "2IconBack")
+        button.left = 10
         button.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]
         return button
     }()
 
     lazy var rotateButton: UIButton = {
         let button = self.iconButton(iconName: "QCropper.rotate.right.fill")
-        button.left = self.flipButton.right
+        button.right = self.width - 10
         button.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]
         return button
     }()
 
-    lazy var aspectRationButton: UIButton = {
-        let button = self.iconButton(iconName: "QCropper.aspectratio.fill")
-        button.right = self.width
-        button.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
+    lazy var aspectRationButton: UILabel = {
+        let button = UILabel()
+        button.font = UIFont(name: "PingFangSC-Semibold", size: 16)
+        button.textColor = .white
+        button.text = "修改头像"
+        button.textAlignment = .center
+        button.bottom = height
+        button.right = (self.width - 100) / 2.0
+        button.size = CGSize(width: 100, height: 44)
         return button
     }()
 
@@ -40,11 +45,12 @@ class TopBar: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         addSubview(blurBackgroundView)
+        addSubview(aspectRationButton)
         addSubview(flipButton)
         addSubview(rotateButton)
-        addSubview(aspectRationButton)
+        
     }
 
     required init?(coder _: NSCoder) {
@@ -64,7 +70,7 @@ class IconButton: UIButton {
 
         let image = UIImage(named: iconName, in: QCropper.Config.resourceBundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         setImage(image, for: .normal)
-        tintColor = UIColor(white: 0.725, alpha: 1)
+        tintColor = UIColor(white: 1, alpha: 1)
     }
 
     required init?(coder: NSCoder) {
@@ -76,8 +82,9 @@ class IconButton: UIButton {
             if isSelected {
                 tintColor = QCropper.Config.highlightColor
             } else {
-                tintColor = UIColor(white: 0.725, alpha: 1)
+                tintColor = UIColor(white: 1, alpha: 1)
             }
         }
     }
 }
+

@@ -24,17 +24,20 @@ class Toolbar: UIView {
     }()
 
     lazy var doneButton: UIButton = {
-        let button = self.titleButton("Done", highlight: true)
-        button.right = self.width
-        button.setTitleColor(UIColor(white: 0.4, alpha: 1), for: .disabled)
+        let button = self.titleButton("确定", highlight: true)
+        button.setTitleColor(UIColor(white: 1, alpha: 1), for: .disabled)
         button.autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin]
+        button.layer.cornerRadius = 25
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.masksToBounds = true
+        button.backgroundColor = UIColor.init(red: 18/255.0, green: 18/255.0, blue: 18/255.0, alpha: 1)
         return button
     }()
 
-    lazy var blurBackgroundView: UIVisualEffectView = {
-        let vev = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-        vev.alpha = 0.3
-        vev.backgroundColor = .clear
+    lazy var blurBackgroundView: UIView = {
+        let vev = UIView()
+        vev.backgroundColor = UIColor.init(red: 18/255.0, green: 18/255.0, blue: 18/255.0, alpha: 1)
         vev.frame = self.bounds
         vev.isUserInteractionEnabled = false
         vev.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin, .flexibleRightMargin, .flexibleBottomMargin, .flexibleHeight, .flexibleWidth]
@@ -44,10 +47,10 @@ class Toolbar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(blurBackgroundView)
-        addSubview(cancelButton)
-        addSubview(resetButton)
         addSubview(doneButton)
+        
+        self.doneButton.frame = CGRect(x: 20, y: 0, width: self.width - 40, height: 50)
+        
     }
 
     required init?(coder _: NSCoder) {
@@ -55,16 +58,10 @@ class Toolbar: UIView {
     }
 
     func titleButton(_ title: String, highlight: Bool = false) -> UIButton {
-        let font = UIFont.systemFont(ofSize: 17)
-        let button = UIButton(frame: CGRect(center: .zero,
-                                            size: CGSize(width: title.width(withFont: font) + 20, height: 44)))
-        if highlight {
-            button.setTitleColor(QCropper.Config.highlightColor, for: .normal)
-            button.setTitleColor(QCropper.Config.highlightColor.withAlphaComponent(0.7), for: .highlighted)
-        } else {
-            button.setTitleColor(UIColor(white: 1, alpha: 1.0), for: .normal)
-            button.setTitleColor(UIColor(white: 1, alpha: 0.7), for: .highlighted)
-        }
+        let font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        let button = UIButton.init()
+        button.setTitleColor(UIColor(white: 1, alpha: 1.0), for: .normal)
+        
         button.titleLabel?.font = font
         button.setTitle(title, for: .normal)
         button.top = 0
@@ -73,3 +70,4 @@ class Toolbar: UIView {
         return button
     }
 }
+
