@@ -61,7 +61,7 @@ open class CropperViewController: UIViewController, Rotatable, StateRestorable, 
 
     public var currentAspectRatioValue: CGFloat = 1.0
     public var isCropBoxPanEnabled: Bool = true
-    public var cropContentInset: UIEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    public var cropContentInset: UIEdgeInsets = UIEdgeInsets(top: 20, left: 45, bottom: 20, right: 45)
 
     let cropBoxHotArea: CGFloat = 50
     let cropBoxMinSize: CGFloat = 20
@@ -740,4 +740,6 @@ extension CropperViewController: AspectRatioPickerDelegate {
 // MARK: Add capability from protocols
 
 extension CropperViewController: Stasisable, AngleAssist, CropBoxEdgeDraggable, AspectRatioSettable {}
+
+
 
