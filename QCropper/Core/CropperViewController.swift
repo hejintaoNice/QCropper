@@ -368,6 +368,7 @@ open class CropperViewController: UIViewController, Rotatable, StateRestorable, 
     @objc
     func flipButtonPressed(_: UIButton) {
         self.dismiss(animated: true)
+        delegate?.cropperDidCancel(self)
     }
 
     @objc
