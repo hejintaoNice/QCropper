@@ -148,14 +148,14 @@ open class CropperViewController: UIViewController, Rotatable, StateRestorable, 
     }()
 
     open lazy var topBar: UIView = {
-        let topBar = TopBar(frame: CGRect(x: 0, y: 0, width: self.view.width, height: self.view.safeAreaInsets.top + barHeight))
+        let topBar = TopBar(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 44 + barHeight))
         topBar.flipButton.addTarget(self, action: #selector(flipButtonPressed(_:)), for: .touchUpInside)
         topBar.rotateButton.addTarget(self, action: #selector(rotateButtonPressed(_:)), for: .touchUpInside)
         return topBar
     }()
 
     open lazy var toolbar: UIView = {
-        let toolbar = Toolbar(frame: CGRect(x: 0, y: 0, width: self.view.width, height: view.safeAreaInsets.bottom + barHeight))
+        let toolbar = Toolbar(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 34 + barHeight))
         toolbar.doneButton.addTarget(self, action: #selector(confirmButtonPressed(_:)), for: .touchUpInside)
         toolbar.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), for: .touchUpInside)
         toolbar.resetButton.addTarget(self, action: #selector(resetButtonPressed(_:)), for: .touchUpInside)
@@ -398,16 +398,16 @@ open class CropperViewController: UIViewController, Rotatable, StateRestorable, 
     open func resetToDefaultLayout() {
         let margin: CGFloat = 20
 
-        topBar.frame = CGRect(x: 0, y: 0, width: view.width, height: view.safeAreaInsets.top + barHeight)
-        toolbar.size = CGSize(width: view.width, height: view.safeAreaInsets.bottom + barHeight)
+        topBar.frame = CGRect(x: 0, y: 0, width: view.width, height: 44 + barHeight)
+        toolbar.size = CGSize(width: view.width, height: 34 + barHeight)
         bottomView.size = CGSize(width: view.width, height: toolbar.height + angleRuler.height + margin)
         bottomView.bottom = view.height
         toolbar.bottom = bottomView.height
         angleRuler.bottom = toolbar.top - margin
         aspectRatioPicker.frame = angleRuler.frame
 
-        let topHeight = topBar.isHidden ? view.safeAreaInsets.top : topBar.height
-        let toolbarHeight = toolbar.isHidden ? view.safeAreaInsets.bottom : toolbar.height
+        let topHeight = topBar.isHidden ? 44 : topBar.height
+        let toolbarHeight = toolbar.isHidden ? 34 : toolbar.height
         let bottomHeight = (angleRuler.isHidden && aspectRatioPicker.isHidden) ? toolbarHeight : bottomView.height
         cropRegionInsets = UIEdgeInsets(top: cropContentInset.top + topHeight,
                                         left: cropContentInset.left + view.safeAreaInsets.left,

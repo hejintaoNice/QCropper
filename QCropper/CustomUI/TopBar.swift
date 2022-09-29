@@ -27,7 +27,7 @@ class TopBar: UIView {
         button.textColor = .white
         button.text = "修改头像"
         button.textAlignment = .center
-        button.bottom = height
+        button.centerY = 44
         button.right = (self.width - 100) / 2.0
         button.size = CGSize(width: 100, height: 44)
         return button
